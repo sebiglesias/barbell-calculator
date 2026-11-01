@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbell Plate Calculator & 1RM Estimator | Visual Plate Loader (LBS & KG)</title>
+  <meta name="description" content="Visual barbell plate loading calculator for powerlifting, CrossFit, and gym training. Calculate exact bumper plates per side in LBS or KG, 1RM max estimates, and warm-up sets.">
+  <meta name="keywords" content="barbell plate calculator, plate loader calculator, 1rm calculator, barbell weight calculator lbs, gym plate math, 225 bench press plates">
+  <link rel="canonical" href="https://sebiglesias.com.ar/barbell-calculator/">
+  <meta name="google-adsense-account" content="ca-pub-3381238987477190">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Barbell Plate Calculator & 1RM Estimator">
+  <meta property="og:description" content="Stop doing gym math while exhausted. Visual barbell plate loading calculator for LBS and KG.">
+  <meta property="og:url" content="https://sebiglesias.com.ar/barbell-calculator/">
+  <meta property="og:image" content="https://sebiglesias.com.ar/barbell-calculator/icon.svg">
+
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#09090b">
+
+  <!-- Google tag (gtag.js) GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BNDBQP0W7');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Barbell Plate Calculator & 1RM Estimator",
+        "url": "https://sebiglesias.com.ar/barbell-calculator/",
+        "description": "Visual barbell plate loading calculator supporting Olympic barbells in pounds (lbs) and kilograms (kg), with warm-up progressions and 1RM calculation.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much does a standard Olympic barbell weigh?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A standard Men's Olympic barbell weighs 45 lbs (20 kg) and measures 7.2 feet in length with 2-inch sleeve diameters. A Women's Olympic barbell weighs 35 lbs (15 kg) with a slightly thinner 25mm shaft."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you load 225 lbs on a barbell?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To load 225 lbs on a standard 45 lb barbell, load two 45 lb plates on each side: 45 lb bar + (2 x 45 lbs) + (2 x 45 lbs) = 225 lbs. In gym slang, this is referred to as 'two plates'."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is 1RM (One Rep Max) calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One Rep Max is estimated from submaximal sets (1 to 10 reps) using the standard Epley formula: 1RM = Weight × (1 + Reps / 30) or the Brzycki formula: 1RM = Weight / (1.0278 - 0.0278 × Reps)."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="backlink-bar">
+      <a href="https://sebiglesias.com.ar" class="backlink">← sebiglesias.com.ar</a>
+    </div>
+
+    <header class="header">
+      <div class="header-badge">🏋️ Strength & Conditioning Tool</div>
+      <h1>Barbell Plate Calculator<span class="accent">.</span></h1>
+      <p class="sub">Visual Olympic barbell plate loader · warm-up sets & 1RM calculator</p>
+    </header>
+
+    <!-- Visual Barbell Sleeve Display -->
+    <section class="card visual-card" aria-label="Visual Barbell Loader">
+      <div class="visual-header">
+        <span class="visual-title">Sleeve Loading (Per Side)</span>
+        <span class="visual-tare" id="tare-badge">Bar: 45 lbs · Collars: 0 lbs</span>
+      </div>
+
+      <div class="barbell-stage">
+        <div class="barbell-wrapper">
+          <div class="bar-shaft">
+            <span class="shaft-text">GRIP / SHAFT</span>
+          </div>
+          <div class="bar-collar-inner"></div>
+          <div class="bar-sleeve" id="bar-sleeve">
+            <!-- Dynamic plates injected here -->
+          </div>
+          <div class="bar-cap"></div>
+        </div>
+      </div>
+
+      <div class="plate-summary-pills" id="plate-pills">
+        <!-- Badge breakdown per side -->
+      </div>
+    </section>
+
+    <!-- Main Controls Card -->
+    <section class="card controls-card">
+      <div class="unit-toggle-row">
+        <label>Unit System</label>
+        <div class="segmented-control" role="group" aria-label="Unit">
+          <button type="button" class="seg-btn active" data-unit="lbs">LBS (Pounds)</button>
+          <button type="button" class="seg-btn" data-unit="kg">KG (Kilograms)</button>
+        </div>
+      </div>
+
+      <div class="weight-input-section">
+        <div class="field-group">
+          <label for="target-weight">Target Weight to Lift</label>
+          <div class="weight-input-wrap">
+            <button type="button" class="btn-step" id="btn-minus-5">−5</button>
+            <input type="number" id="target-weight" value="225" min="45" max="1200" step="2.5" inputmode="decimal">
+            <span class="weight-unit" id="display-unit">lbs</span>
+            <button type="button" class="btn-step" id="btn-plus-5">+5</button>
+          </div>
+        </div>
+
+        <div class="quick-presets">
+          <span class="preset-label">Milestones:</span>
+          <div class="preset-buttons" id="preset-buttons">
+            <button type="button" class="btn-preset" data-w="135">135 (1 plate)</button>
+            <button type="button" class="btn-preset active" data-w="225">225 (2 plates)</button>
+            <button type="button" class="btn-preset" data-w="315">315 (3 plates)</button>
+            <button type="button" class="btn-preset" data-w="405">405 (4 plates)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bar-config-grid">
+        <div class="field-group">
+          <label for="bar-select">Barbell Type</label>
+          <select id="bar-select">
+            <option value="45" selected>Standard Men's Bar (45 lbs / 20 kg)</option>
+            <option value="35">Women's / Crossfit Bar (35 lbs / 15 kg)</option>
+            <option value="15">Technique / Junior Bar (15 lbs / 6.8 kg)</option>
+            <option value="55">Trap / Hex Bar (55 lbs / 25 kg)</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="collar-select">Collars / Clamps</label>
+          <select id="collar-select">
+            <option value="0" selected>None / Spring Clip (~0 lbs)</option>
+            <option value="5">Competition Collars (+5 lbs total)</option>
+            <option value="2.5">Heavy Metal Collars (+2.5 lbs total)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="math-result-box">
+        <div class="math-col">
+          <span class="math-label">Weight Per Side</span>
+          <span class="math-val" id="val-per-side">90 lbs</span>
+        </div>
+        <div class="math-col">
+          <span class="math-label">Actual Bar Total</span>
+          <span class="math-val highlight" id="val-actual-total">225 lbs</span>
+        </div>
+        <div class="math-col">
+          <span class="math-label">Difference</span>
+          <span class="math-val" id="val-diff">0 lbs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warm-up & 1RM Progression Card -->
+    <section class="card progression-card">
+      <h2>Warm-Up Pyramid & Working Sets</h2>
+      <p class="section-desc">Recommended ramp-up progression to reach your target without premature fatigue:</p>
+      
+      <div class="warmup-table-wrap">
+        <table class="warmup-table">
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Intensity</th>
+              <th>Total Weight</th>
+              <th>Plates Per Side</th>
+              <th>Reps</th>
+            </tr>
+          </thead>
+          <tbody id="warmup-tbody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 1RM Calculator Card -->
+    <section class="card one-rm-card">
+      <h2>1-Rep Max (1RM) Estimator</h2>
+      <p class="section-desc">Estimate your absolute ceiling using the validated Epley and Brzycki strength equations:</p>
+
+      <div class="one-rm-inputs">
+        <div class="field-group">
+          <label for="rm-weight">Lifted Weight</label>
+          <input type="number" id="rm-weight" value="185" min="20" step="2.5">
+        </div>
+        <div class="field-group">
+          <label for="rm-reps">Repetitions Completed</label>
+          <input type="number" id="rm-reps" value="5" min="1" max="15">
+        </div>
+      </div>
+
+      <div class="one-rm-display">
+        <div class="rm-hero">
+          <span class="rm-num" id="rm-result">216</span>
+          <span class="rm-unit" id="rm-unit">lbs</span>
+        </div>
+        <span class="rm-sub">Estimated 1RM (Epley & Brzycki average)</span>
+      </div>
+    </section>
+
+    <!-- AdSense Responsive Placement -->
+    <div class="adsense-wrap" style="text-align: center; margin: 2rem 0;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="card faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>What is the color code for Olympic bumper plates?</h3>
+        <p>The International Weightlifting Federation (IWF) standard: <strong>Red is 55 lbs (25 kg)</strong>, <strong>Blue is 45 lbs (20 kg)</strong>, <strong>Yellow is 35 lbs (15 kg)</strong>, and <strong>Green is 25 lbs (10 kg)</strong>. Change plates are White (11 lbs / 5 kg) and Black (5.5 lbs / 2.5 kg).</p>
+      </div>
+      <div class="faq-item">
+        <h3>Should I always load the heaviest plates first?</h3>
+        <p>Yes. Always slide the largest, heaviest plates closest to the barbell collar. This centers the mass, stabilizes the barbell whip during squats and clean & jerks, and prevents sleeve bending.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Part of the <a href="https://sebiglesias.com.ar">sebiglesias.com.ar</a> utility tools suite.</p>
+      <p class="copy">Free strength training utility · No registration required</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

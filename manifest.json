@@ -1,0 +1,15 @@
+{
+  "name": "Barbell Plate Calculator",
+  "short_name": "BarbellCalc",
+  "start_url": "/barbell-calculator/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

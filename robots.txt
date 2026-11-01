@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sebiglesias.com.ar/barbell-calculator/sitemap.xml
