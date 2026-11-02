@@ -314,7 +314,39 @@
   </div>
 
 
-    <footer>
+    
+<!-- EMBED_WIDGET_ENGINE -->
+<div id="embed-widget-generator" style="margin:1.8rem 0;padding:1rem;background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.18);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.78rem">
+  <details>
+    <summary style="cursor:pointer;font-weight:700;color:#10B981;list-style:none;display:flex;align-items:center;justify-content:space-between">
+      <span>⚡ Embed this Calculator on Your Website</span>
+      <span style="font-size:0.7rem;opacity:0.75">&lt;/&gt; HTML</span>
+    </summary>
+    <div style="margin-top:0.8rem">
+      <p style="margin-bottom:0.5rem;opacity:0.8;font-size:0.74rem">Copy this HTML snippet to embed this interactive calculator for free on your blog, forum, or store:</p>
+      <textarea id="embed-code-box-barbell-calculator" readonly rows="4" style="width:100%;background:#0F0E0B;color:#F2EFE6;border:1px solid rgba(255,255,255,0.18);border-radius:4px;padding:0.6rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;resize:none">&lt;iframe src="https://sebiglesias.com.ar/barbell-calculator/?embed=1" width="100%" height="680" style="border:1px solid rgba(150,150,150,0.25);border-radius:8px;overflow:hidden" loading="lazy"&gt;&lt;/iframe&gt;
+&lt;p style="font-size:12px;text-align:right;margin-top:4px;opacity:0.8"&gt;Powered by &lt;a href="https://sebiglesias.com.ar/barbell-calculator/" target="_blank" rel="noopener"&gt;Barbell Plate & 1RM Calculator&lt;/a&gt;&lt;/p&gt;</textarea>
+      <button type="button" onclick="(function(btn){var el=document.getElementById('embed-code-box-barbell-calculator');navigator.clipboard.writeText(el.value);var old=btn.textContent;btn.textContent='✅ Embed Code Copied!';setTimeout(function(){btn.textContent=old;},2000);})(this)" style="margin-top:0.5rem;background:#10B981;color:#14130F;border:none;padding:0.45rem 0.9rem;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:0.74rem;font-weight:700;cursor:pointer">📋 Copy Embed Code</button>
+    </div>
+  </details>
+</div>
+<script>
+(function(){
+  if (new URLSearchParams(window.location.search).get('embed') === '1') {
+    const hideSelectors = [
+      '.site-header', '.site-header-top', '.backlink-bar', 'header > .container.header-inner',
+      '.prose', '.seo-section', '.faq-section', '.family-nav', '.related-cluster',
+      '#embed-widget-generator', '.adsense-wrap', '.ad-slot-container'
+    ];
+    hideSelectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => { el.style.display = 'none'; });
+    });
+    document.body.style.paddingTop = '0.75rem';
+  }
+})();
+</script>
+
+<footer>
       <p>Part of the <a href="https://sebiglesias.com.ar">sebiglesias.com.ar</a> utility tools suite.</p>
       <p class="copy">Free strength training utility · No registration required</p>
     </footer>
