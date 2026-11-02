@@ -7,6 +7,17 @@
   <meta name="description" content="Visual barbell plate loading calculator for powerlifting, CrossFit, and gym training. Calculate exact bumper plates per side in LBS or KG, 1RM max estimates, and warm-up sets.">
   <meta name="keywords" content="barbell plate calculator, plate loader calculator, 1rm calculator, barbell weight calculator lbs, gym plate math, 225 bench press plates">
   <link rel="canonical" href="https://sebiglesias.com.ar/barbell-calculator/">
+<link rel="alternate" hreflang="en" href="https://sebiglesias.com.ar/barbell-calculator/">
+<link rel="alternate" hreflang="es" href="https://sebiglesias.com.ar/barbell-calculator/?lang=es">
+<link rel="alternate" hreflang="de" href="https://sebiglesias.com.ar/barbell-calculator/?lang=de">
+<link rel="alternate" hreflang="fr" href="https://sebiglesias.com.ar/barbell-calculator/?lang=fr">
+<link rel="alternate" hreflang="it" href="https://sebiglesias.com.ar/barbell-calculator/?lang=it">
+<link rel="alternate" hreflang="pt" href="https://sebiglesias.com.ar/barbell-calculator/?lang=pt">
+<link rel="alternate" hreflang="nl" href="https://sebiglesias.com.ar/barbell-calculator/?lang=nl">
+<link rel="alternate" hreflang="sv" href="https://sebiglesias.com.ar/barbell-calculator/?lang=sv">
+<link rel="alternate" hreflang="da" href="https://sebiglesias.com.ar/barbell-calculator/?lang=da">
+<link rel="alternate" hreflang="pl" href="https://sebiglesias.com.ar/barbell-calculator/?lang=pl">
+<link rel="alternate" hreflang="x-default" href="https://sebiglesias.com.ar/barbell-calculator/">
   <meta name="google-adsense-account" content="ca-pub-3381238987477190">
 
   <!-- Open Graph -->
@@ -90,8 +101,20 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="backlink-bar">
+    <div class="backlink-bar" style="display:flex;align-items:center;justify-content:space-between">
       <a href="https://sebiglesias.com.ar" class="backlink">← sebiglesias.com.ar</a>
+      <select id="lang-select" aria-label="Language" style="background:#24221C;border:1px solid rgba(242,239,230,.18);color:#F2EFE6;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:3px 6px;border-radius:3px;cursor:pointer;margin-left:auto">
+  <option value="en">🇺🇸 EN</option>
+  <option value="es">🇪🇸 ES</option>
+  <option value="de">🇩🇪 DE</option>
+  <option value="fr">🇫🇷 FR</option>
+  <option value="it">🇮🇹 IT</option>
+  <option value="pt">🇵🇹 PT</option>
+  <option value="nl">🇳🇱 NL</option>
+  <option value="sv">🇸🇪 SV</option>
+  <option value="da">🇩🇰 DA</option>
+  <option value="pl">🇵🇱 PL</option>
+</select>
     </div>
 
     <header class="header">
@@ -298,5 +321,41 @@
   </div>
 
   <script src="app.js"></script>
+
+<script>
+/* I18N_AUTO_ENGINE */
+(function(){
+  const DICT = {"en": {"title": "Barbell Plate Calculator<span class='accent'>.</span>", "sub": "Visual Olympic barbell plate loader · warm-up sets & 1RM calculator"}, "es": {"title": "Calculadora de Discos Olímpica<span class='accent'>.</span>", "sub": "Cargador visual de barra en KG y LBS · series de calentamiento y 1RM"}, "de": {"title": "Langhantel-Scheibenrechner & 1RM<span class='accent'>.</span>", "sub": "Visueller Hantelscheiben-Rechner in KG & LBS · Aufwärmsätze & Maximalkraft"}, "fr": {"title": "Calculateur Disques Barre & 1RM<span class='accent'>.</span>", "sub": "Chargeur visuel de barre olympique en KG et LBS · échauffement et 1RM"}, "it": {"title": "Calcolatore Dischi Bilanciere & 1RM<span class='accent'>.</span>", "sub": "Caricatore visivo bilanciere olimpico in KG e LBS · riscaldamento e massimale"}, "pt": {"title": "Calculadora de Anilhas & 1RM<span class='accent'>.</span>", "sub": "Carregador visual de barra olímpica em KG e LBS · aquecimento e 1RM"}, "nl": {"title": "Halterschijven & 1RM Calculator<span class='accent'>.</span>", "sub": "Visuele olympische halter lader in KG en LBS · warming-up sets & 1RM"}, "sv": {"title": "Skivstångs- & 1RM-Kalkylator<span class='accent'>.</span>", "sub": "Visuell viktskiveladdare i KG och LBS · uppvärmningsset och 1RM maxlyft"}, "da": {"title": "Vægtstang Skiveberegner & 1RM<span class='accent'>.</span>", "sub": "Visuel olympisk vægtstang-beregner i KG og LBS · opvarmning og 1RM"}, "pl": {"title": "Kalkulator Obciążenia Sztangi i 1RM<span class='accent'>.</span>", "sub": "Wizualny kalkulator talerzy na sztangę w KG i LBS · serie rozgrzewkowe i 1RM"}};
+  const h1El = document.querySelector('h1');
+  const subEl = document.querySelector('.sub');
+  const selEl = document.getElementById('lang-select');
+  function applyLang(lang) {
+    const entry = DICT[lang] || DICT.en;
+    document.documentElement.lang = lang;
+    if (h1El && entry.title) h1El.innerHTML = entry.title;
+    if (subEl && entry.sub) subEl.textContent = entry.sub;
+    if (lang !== 'en' && entry.sub) {
+      document.title = h1El ? (h1El.textContent + ' — ' + entry.sub) : entry.sub;
+    }
+  }
+  const params = new URLSearchParams(window.location.search);
+  const init = params.get('lang') || localStorage.getItem('barbell-calculator-lang') || 'en';
+  const valid = DICT[init] ? init : 'en';
+  if (selEl) {
+    selEl.value = valid;
+    selEl.addEventListener('change', function(e) {
+      const nl = e.target.value;
+      localStorage.setItem('barbell-calculator-lang', nl);
+      const u = new URL(window.location.href);
+      if (nl === 'en') u.searchParams.delete('lang');
+      else u.searchParams.set('lang', nl);
+      window.history.replaceState({}, '', u);
+      applyLang(nl);
+    });
+  }
+  applyLang(valid);
+})();
+</script>
+
 </body>
 </html>
