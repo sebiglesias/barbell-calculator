@@ -633,3 +633,58 @@ header {
   color: var(--accent);
   transform: translateY(-2px);
 }
+
+/* Amazon Associates Gear Box */
+.affiliate-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+.affiliate-box h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.affiliate-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.6rem;
+}
+.affiliate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  transition: all 0.15s ease;
+}
+.affiliate-btn:hover {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  color: #fff;
+}
+.affiliate-badge {
+  font-size: 0.68rem;
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+.amazon-disclosure {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 0.65rem;
+  text-align: center;
+}
